@@ -32,6 +32,7 @@ checkCommands()
 checkCommands
 
 # define global variables
+script_version="v1.2.6"
 include_alpha_build_versions="false"
 build_archives_url="https://dist.torproject.org/torbrowser/"
 home_directory="/home/$(/usr/bin/id --user --name)"
@@ -43,7 +44,7 @@ tarball_filename_language="en-US"
 tarball_filename_suffix="tar.xz"
 torbrowser_source_directory="${tarball_filename_prefix}_${tarball_filename_language}"
 torbrowser_desktop_filename="start-tor-browser.desktop"
-version_regex="[0-9]{1,2}\.[0-9](\.[0-9]|[a-z][0-9])?"
+torbrowser_version_regex="[0-9]{1,2}\.[0-9](\.[0-9]|[a-z][0-9])?"
 
 createDownloadDirectory()
 {
@@ -91,7 +92,7 @@ extractArchiveFile()
 getAllTorbrowserVersions()
 {
     # get all versions, newest version first
-    all_torbrowser_versions=$(/usr/bin/curl --silent --request GET "${build_archives_url}" | /bin/sed --expression="s/<[^>]*>//g" | /bin/grep --extended-regexp --only-matching "${version_regex}" | /usr/bin/sort --version-sort --reverse)
+    all_torbrowser_versions=$(/usr/bin/curl --silent --request GET "${build_archives_url}" | /bin/sed --expression="s/<[^>]*>//g" | /bin/grep --extended-regexp --only-matching "${torbrowser_version_regex}" | /usr/bin/sort --version-sort --reverse)
 }
 
 getLatestTorbrowserVersion()
@@ -150,7 +151,7 @@ getScriptUsage()
 
 getVersion()
 {
-    /bin/echo "${script_name} v1.2.3"
+    /bin/echo "${script_name} ${script_version}"
     exit 0
 }
 

@@ -116,6 +116,7 @@ $ torbrowser --torbrowser-version 9.5.1
 $ torbrowser --help
 ```
 ```no-highlight
+
 torbrowser - Download and run the latest torbrowser version
 
 Usage: torbrowser [options]
@@ -128,7 +129,7 @@ OPTIONS
      Include alpha builds.
 
   -r, --redownload
-     Remove all files in '/home/username/.cache/torbrowser' and redownload the latest torbrowser version.
+     Remove all files in '/home/ramon/.cache/torbrowser' and redownload the latest torbrowser version.
 
   -t, --torbrowser-version <version>
      Specify an existing torbrowser version.
@@ -143,9 +144,13 @@ EXAMPLES:
   Download and run a specific torbrowser version:
      torbrowser --torbrowser-version 9.5
 
-  Remove all files in '/home/username/.cache/torbrowser', download and run the latest alpha build:
+  Download and run a specific torbrowser alpha version:
+     torbrowser --include-alpha-builds --torbrowser-version 10.0a2
+
+  Remove all files in '/home/ramon/.cache/torbrowser', download and run the latest alpha build:
      torbrowser --redownload --include-alpha-builds
 
-  Remove all files in '/home/username/.cache/torbrowser' and download a specific torbrowser version:
+  Remove all files in '/home/ramon/.cache/torbrowser' and download a specific torbrowser version:
      torbrowser --redownload --torbrowser-version 9.5.1
+
 ```

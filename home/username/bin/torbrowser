@@ -148,7 +148,7 @@ getScriptUsage()
 
 getVersion()
 {
-    /bin/echo "${script_name} v1.2.1"
+    /bin/echo "${script_name} v1.2.2"
     exit 0
 }
 
@@ -178,7 +178,6 @@ verifyArchiveFile()
 
 main()
 {
-
     while (( ${#} ))
     do
         case "${1}" in

@@ -148,7 +148,7 @@ getScriptUsage()
 
 getVersion()
 {
-    /bin/echo "${script_name} v1.2.0"
+    /bin/echo "${script_name} v1.2.1"
     exit 0
 }
 
@@ -178,8 +178,6 @@ verifyArchiveFile()
 
 main()
 {
-
-    # parameter to redownload and unarchive all files
 
     while (( ${#} ))
     do

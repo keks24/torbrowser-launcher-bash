@@ -23,7 +23,6 @@ checkCommands()
         unalias ${current_command} 2>/dev/null
         if [[ ! $(command -v ${current_command} 2>/dev/null) ]]
         then
-            getScriptUsage
             /bin/echo -e "\e[01;31mcould not find command '${current_command}'.\e[0m"
             exit 1
         fi

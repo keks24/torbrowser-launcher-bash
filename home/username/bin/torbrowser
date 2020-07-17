@@ -1,0 +1,236 @@
+#!/bin/bash
+#############################################################################
+# Copyright 2020 Ramon Fischer                                              #
+#                                                                           #
+# Licensed under the Apache License, Version 2.0 (the "License");           #
+# you may not use this file except in compliance with the License.          #
+# You may obtain a copy of the License at                                   #
+#                                                                           #
+#     http://www.apache.org/licenses/LICENSE-2.0                            #
+#                                                                           #
+# Unless required by applicable law or agreed to in writing, software       #
+# distributed under the License is distributed on an "AS IS" BASIS,         #
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  #
+# See the License for the specific language governing permissions and       #
+# limitations under the License.                                            #
+#############################################################################
+
+command_list=(aria2c curl gpg grep head id mkdir pixz rm sed sort tar)
+checkCommands()
+{
+    for current_command in "${command_list[@]}"
+    do
+        unalias ${current_command} 2>/dev/null
+        if [[ ! $(command -v ${current_command} 2>/dev/null) ]]
+        then
+            getScriptUsage
+            /bin/echo -e "\e[01;31mcould not find command '${current_command}'.\e[0m"
+            exit 1
+        fi
+    done
+}
+
+checkCommands
+
+# define global variables
+include_alpha_build_versions="false"
+build_archives_url="https://dist.torproject.org/torbrowser/"
+home_directory="/home/$(/usr/bin/id --user --name)"
+script_name="${0##*/}"
+download_directory="${home_directory}/.cache/${script_name}"
+tarball_filename_prefix="tor-browser"
+tarball_filename_architecture="linux64"
+tarball_filename_language="en-US"
+tarball_filename_suffix="tar.xz"
+torbrowser_source_directory="${tarball_filename_prefix}_${tarball_filename_language}"
+torbrowser_desktop_filename="start-tor-browser.desktop"
+version_regex="[0-9]{1,2}\.[0-9](\.[0-9]|[a-z][0-9])?"
+
+createDownloadDirectory()
+{
+    /bin/mkdir --parents "${download_directory}"
+}
+
+concatenateTarballAndSignatureFilename()
+{
+    # example filename: tor-browser-linux64-9.5.1_en-US.tar.xz
+    tarball_filename="${tarball_filename_prefix}-${tarball_filename_architecture}-${tarball_filename_version}_${tarball_filename_language}.${tarball_filename_suffix}"
+    # example filename: tor-browser-linux64-9.5.1_en-US.tar.xz.asc
+    tarball_signature_filename="${tarball_filename}.asc"
+}
+
+
+downloadArchiveAndSignatureFile()
+{
+    if [[ ! -f "${download_directory}/${tarball_filename}" ]]
+    then
+        if [[ $(/usr/bin/curl --silent --request GET "${build_archives_url}/${tarball_filename_version}/" | /bin/sed --expression="s/<[^>]*>//g" | /bin/grep "${tarball_filename}") ]]
+        then
+            /usr/bin/aria2c --split="4" --max-connection-per-server="8" --force-sequential --allow-overwrite --auto-file-renaming=false \
+                "${build_archives_url}/${tarball_filename_version}/${tarball_filename}" \
+                "${build_archives_url}/${tarball_filename_version}/${tarball_signature_filename}" --dir="${download_directory}"
+        else
+            /bin/echo -e "\e[01;31mCould not find tarball file on server: '${build_archives_url}/${tarball_filename_version}/${tarball_filename}'.\e[0m"
+            exit 1
+        fi
+    else
+        startTorbrowser
+    fi
+}
+
+extractArchiveFile()
+{
+    if [[ -f "${download_directory}/${tarball_filename}" ]]
+    then
+        /bin/tar --use-compress-program="/usr/bin/pixz" --extract --verbose --preserve-permissions --file="${download_directory}/${tarball_filename}" --directory="${download_directory}"
+    else
+        /bin/echo -e "\e[01;31mCould not find tarball file '${download_directory}/${tarball_filename}'.\e[0m"
+        exit 1
+    fi
+}
+
+getAllTorbrowserVersions()
+{
+    # get all versions, newest version first
+    all_torbrowser_versions=$(/usr/bin/curl --silent --request GET "${build_archives_url}" | /bin/sed --expression="s/<[^>]*>//g" | /bin/grep --extended-regexp --only-matching "${version_regex}" | /usr/bin/sort --version-sort --reverse)
+}
+
+getLatestTorbrowserVersion()
+{
+    if [[ "${tarball_filename_version}" != "" ]]
+    then
+        return
+    elif [[ "${include_alpha_build_versions}" == "false" ]]
+    then
+        tarball_filename_version=$(/bin/echo "${all_torbrowser_versions}" | /bin/grep --invert-match "a" | /usr/bin/head --lines="1")
+    else
+        tarball_filename_version=$(/bin/echo "${all_torbrowser_versions}" | /usr/bin/head --lines="1")
+    fi
+}
+
+getScriptUsage()
+{
+    /bin/echo ""
+    /bin/echo "${script_name} - Download and run the latest torbrowser version"
+    /bin/echo ""
+    /bin/echo "Usage: ${script_name} [options]"
+    /bin/echo ""
+    /bin/echo "OPTIONS"
+    /bin/echo "  -h, --help"
+    /bin/echo "     Display this help text."
+    /bin/echo ""
+    /bin/echo "  -i, --include-alpha-builds"
+    /bin/echo "     Include alpha builds."
+    /bin/echo ""
+    /bin/echo "  -r, --redownload"
+    /bin/echo "     Remove all files in '${download_directory}' and redownload the latest torbrowser version."
+    /bin/echo ""
+    /bin/echo "  -t, --torbrowser-version <version>"
+    /bin/echo "     Specify an existing torbrowser version."
+    /bin/echo ""
+    /bin/echo "  -v, --version"
+    /bin/echo "     Displays the current version of this script."
+    /bin/echo ""
+    /bin/echo "EXAMPLES:"
+    /bin/echo "  Download and run the latest alpha build:"
+    /bin/echo "     ${script_name} --include-alpha-builds"
+    /bin/echo ""
+    /bin/echo "  Download and run a specific torbrowser version:"
+    /bin/echo "     ${script_name} --torbrowser-version 9.5"
+    /bin/echo ""
+    /bin/echo "  Remove all files in '${download_directory}', download and run the latest alpha build:"
+    /bin/echo "     ${script_name} --redownload --include-alpha-builds"
+    /bin/echo ""
+    /bin/echo "  Remove all files in '${download_directory}' and download a specific torbrowser version:"
+    /bin/echo "     ${script_name} --redownload --torbrowser-version 9.5.1"
+    /bin/echo ""
+}
+
+getVersion()
+{
+    /bin/echo "${script_name} v1.1.0"
+    exit 0
+}
+
+removeAllFiles()
+{
+    /bin/rm --recursive --force --verbose "${download_directory}/tor-browser"*
+}
+
+startTorbrowser()
+{
+    if [[ -d "${download_directory}/${torbrowser_source_directory}" ]]
+    then
+        pushd "${torbrowser_source_directory}" >/dev/null
+        ./${torbrowser_desktop_filename}
+        popd >/dev/null
+        exit 0
+    else
+        /bin/echo -e "\e[01;31mCould not find directory '${download_directory}/${torbrowser_source_directory}'\e[0m"
+        exit 1
+    fi
+}
+
+verifyArchiveFile()
+{
+    /usr/bin/gpg --verify "${download_directory}/${tarball_signature_filename}"
+}
+
+main()
+{
+
+    # parameter to redownload and unarchive all files
+
+    while (( ${#} ))
+    do
+        case "${1}" in
+            "-h" | "--help")
+                getScriptUsage
+                exit 0
+                ;;
+
+            "-i" | "--include-alpha-builds")
+                include_alpha_build_versions="true"
+                ;;
+
+            "-r" | "--redownload")
+                removeAllFiles
+                ;;
+
+            "-t" | "--torbrowser-version")
+                # bash cannot handle floating point numbers; writing a check would be overkill
+                tarball_filename_version="${2}"
+                shift
+                ;;
+
+            "-v" | "--version")
+                getVersion
+                ;;
+
+            *)
+                getScriptUsage
+                /bin/echo -e "\e[01;31mParameter '${1}' not found.\e[0m"
+                exit 1
+        esac
+
+        shift || break
+    done
+
+    createDownloadDirectory
+
+    getAllTorbrowserVersions
+
+    getLatestTorbrowserVersion
+
+    concatenateTarballAndSignatureFilename
+
+    downloadArchiveAndSignatureFile
+
+    verifyArchiveFile
+
+    extractArchiveFile
+
+    startTorbrowser
+}
+
+main "${@}"

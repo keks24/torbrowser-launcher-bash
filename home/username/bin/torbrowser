@@ -138,6 +138,9 @@ getScriptUsage()
     /bin/echo "  Download and run a specific torbrowser version:"
     /bin/echo "     ${script_name} --torbrowser-version 9.5"
     /bin/echo ""
+    /bin/echo "  Download and run a specific torbrowser alpha version:"
+    /bin/echo "     ${script_name} --include-alpha-builds --torbrowser-version 10.0a2"
+    /bin/echo ""
     /bin/echo "  Remove all files in '${download_directory}', download and run the latest alpha build:"
     /bin/echo "     ${script_name} --redownload --include-alpha-builds"
     /bin/echo ""
@@ -148,7 +151,7 @@ getScriptUsage()
 
 getVersion()
 {
-    /bin/echo "${script_name} v1.2.2"
+    /bin/echo "${script_name} v1.2.3"
     exit 0
 }
 

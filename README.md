@@ -111,8 +111,7 @@ Launching './Browser/start-tor-browser --detach'...
 $ torbrowser --torbrowser-version 9.5.1
 ```
 
----
-
+# Parameters
 ```bash
 $ torbrowser --help
 ```

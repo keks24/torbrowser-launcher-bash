@@ -106,6 +106,13 @@ tor-browser_en-US/start-tor-browser.desktop
 Launching './Browser/start-tor-browser --detach'...
 ```
 
+2. It might be necessary to provide a specific version, since this script is not perfect:
+```bash
+$ torbrowser --torbrowser-version 9.5.1
+```
+
+---
+
 ```bash
 $ torbrowser --help
 ```

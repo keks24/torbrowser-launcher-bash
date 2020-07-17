@@ -18,21 +18,7 @@ sort
 tar
 ```
 
-# Installation
-Clone the repository into your current working directory:
-```bash
-$ git clone "https://gitlab.com/keks24/torbrowser-launcher-bash.git"
-```
-
-Copy all necessary files:
-```bash
-$ cd "torbrowser-launcher-bash/"
-$ cp "home/username/bin/torbrowser" "/home/username/bin/"
-$ chmod 755 "/home/username/bin/torbrowser"
-```
-
-# Usage
-1. Make sure that the path `/home/username/bin/` is in your `${PATH}` variable:
+* The path `/home/$(id --user --name)/bin/` exists in the `${PATH}` variable:
 ```bash
 $ echo "${PATH//:/\n}"
 ```
@@ -50,7 +36,21 @@ $ echo "${PATH//:/\n}"
 /opt/bin
 ```
 
-2. Execute `torbrowser`. This will download the `latest` archive from https://dist.torproject.org/torbrowser/ to `/home/username/.cache/torbrowser/`:
+# Installation
+Clone the repository into your current working directory:
+```bash
+$ git clone "https://gitlab.com/keks24/torbrowser-launcher-bash.git"
+```
+
+Copy all necessary files:
+```bash
+$ cd "torbrowser-launcher-bash/"
+$ cp "home/username/bin/torbrowser" "/home/$(id --user --name)/bin/"
+$ chmod 755 "/home/$(id --user --name)/bin/torbrowser"
+```
+
+# Usage
+1. Execute `torbrowser`. This will download the `latest` archive from https://dist.torproject.org/torbrowser/ to `/home/username/.cache/torbrowser/`:
 ```bash
 $ torbrowser
 ```

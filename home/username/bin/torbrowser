@@ -148,7 +148,7 @@ getScriptUsage()
 
 getVersion()
 {
-    /bin/echo "${script_name} v1.1.0"
+    /bin/echo "${script_name} v1.2.0"
     exit 0
 }
 
@@ -161,7 +161,7 @@ startTorbrowser()
 {
     if [[ -d "${download_directory}/${torbrowser_source_directory}" ]]
     then
-        pushd "${torbrowser_source_directory}" >/dev/null
+        pushd "${download_directory}/${torbrowser_source_directory}" >/dev/null
         ./${torbrowser_desktop_filename}
         popd >/dev/null
         exit 0

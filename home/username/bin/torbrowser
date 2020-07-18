@@ -32,7 +32,7 @@ checkCommands()
 checkCommands
 
 # define global variables
-script_version="v1.2.6"
+script_version="v1.2.7"
 include_alpha_build_versions="false"
 build_archives_url="https://dist.torproject.org/torbrowser/"
 home_directory="/home/$(/usr/bin/id --user --name)"

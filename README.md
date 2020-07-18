@@ -50,7 +50,7 @@ $ chmod 755 "/home/$(id --user --name)/bin/torbrowser"
 ```
 
 # Usage
-1. Execute `torbrowser`. This will download the `latest` archive from https://dist.torproject.org/torbrowser/ to `/home/username/.cache/torbrowser/`:
+1. Execute `torbrowser`. This will download the `latest` archive from https://dist.torproject.org/torbrowser/ to `/home/$(id --user --name)/.cache/torbrowser/`:
 ```bash
 $ torbrowser
 ```

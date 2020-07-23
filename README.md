@@ -116,7 +116,6 @@ $ torbrowser --torbrowser-version 9.5.1
 $ torbrowser --help
 ```
 ```no-highlight
-
 torbrowser - Download and run the latest torbrowser version
 
 Usage: torbrowser [options]
@@ -152,5 +151,4 @@ EXAMPLES:
 
   Remove all files in '/home/ramon/.cache/torbrowser' and download a specific torbrowser version:
      torbrowser --redownload --torbrowser-version 9.5.1
-
 ```

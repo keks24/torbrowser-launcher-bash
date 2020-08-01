@@ -36,6 +36,63 @@ $ echo "${PATH//:/\n}"
 /opt/bin
 ```
 
+* The `Tor Browser Developers` GPG public key is `imported` and `signed by your private key`:
+```bash
+$ gpg --auto-key-locate nodefault,wkd --locate-keys torbrowser@torproject.org
+```
+```no-highlight
+gpg: key 4E2C6E8793298290: public key "Tor Browser Developers (signing key) <torbrowser@torproject.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+pub   rsa4096 2014-12-15 [C] [expires: 2025-07-21]
+      EF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+uid           [ unknown] Tor Browser Developers (signing key) <torbrowser@torproject.org>
+sub   rsa4096 2018-05-26 [S] [expires: 2020-12-19]
+```
+```bash
+$ gpg --lsign-key EF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+```
+```no-highlight
+pub  rsa4096/4E2C6E8793298290
+     created: 2014-12-15  expires: 2025-07-21  usage: C
+     trust: unknown       validity: unknown
+The following key was revoked on 2015-08-26 by RSA key 4E2C6E8793298290 Tor Browser Developers (signing key) <torbrowser@torproject.org>
+sub  rsa4096/2D000988589839A3
+     created: 2014-12-15  revoked: 2015-08-26  usage: S
+sub  rsa4096/EB774491D9FF06E2
+     created: 2018-05-26  expires: 2020-12-19  usage: S
+[ unknown] (1). Tor Browser Developers (signing key) <torbrowser@torproject.org>
+
+
+pub  rsa4096/4E2C6E8793298290
+     created: 2014-12-15  expires: 2025-07-21  usage: C
+     trust: unknown       validity: unknown
+ Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
+
+     Tor Browser Developers (signing key) <torbrowser@torproject.org>
+
+This key is due to expire on 2025-07-21.
+Are you sure that you want to sign this key with your
+key "Ramon Fischer (ramon@sharkoon) <Ramon_Fischer@hotmail.de>" (155BE26413E699BF)
+
+The signature will be marked as non-exportable.
+
+Really sign? (y/N) y
+```
+```bash
+$ gpg --list-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+```
+```no-highlight
+pub   rsa4096 2014-12-15 [C] [expires: 2025-07-21]
+      EF6E286DDA85EA2A4BA7DE684E2C6E8793298290
+uid           [  full  ] Tor Browser Developers (signing key) <torbrowser@torproject.org>
+sub   rsa4096 2018-05-26 [S] [expires: 2020-12-19]
+```
+
+Sources:
+* [Torproject - How to verify signature](https://support.torproject.org/tbb/how-to-verify-signature/)
+* [Superuser - How to locally sign a GPG public key](https://superuser.com/a/1435150)
+
 # Installation
 Clone the repository into your current working directory:
 ```bash

@@ -176,7 +176,7 @@ startTorbrowser()
 
 verifyArchiveFile()
 {
-    /usr/bin/gpg --verify "${download_directory}/${tarball_signature_filename}"
+    /usr/bin/gpg --verify "${download_directory}/${tarball_signature_filename}" "${download_directory}/${tarball_filename}"
 }
 
 main()

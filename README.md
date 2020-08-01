@@ -55,33 +55,34 @@ $ chmod 755 "/home/$(id --user --name)/bin/torbrowser"
 $ torbrowser
 ```
 ```no-highlight
-07/17 20:33:42 [NOTICE] Downloading 2 item(s)
+08/01 21:26:58 [NOTICE] Downloading 2 item(s)
 
-07/17 20:33:42 [WARN] aria2c had to connect to the other side using an unknown TLS protocol. The integrity and confidentiality of the connection might be compromised.
-Peer: dist.torproject.org (2a01:4f8:fff0:4f:266:37ff:fe2c:5d19:443)
+08/01 21:26:58 [WARN] aria2c had to connect to the other side using an unknown TLS protocol. The integrity and confidentiality of the connection might be compromised.
+Peer: dist.torproject.org (2a01:4f8:fff0:4f:266:37ff:feae:3bbc:443)
 
-07/17 20:33:42 [WARN] aria2c had to connect to the other side using an unknown TLS protocol. The integrity and confidentiality of the connection might be compromised.
-Peer: dist.torproject.org (2a01:4f8:fff0:4f:266:37ff:fe2c:5d19:443)
+08/01 21:26:58 [WARN] aria2c had to connect to the other side using an unknown TLS protocol. The integrity and confidentiality of the connection might be compromised.
+Peer: dist.torproject.org (2a01:4f8:fff0:4f:266:37ff:feae:3bbc:443)
 
-07/17 20:33:42 [NOTICE] Download complete: /home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.1_en-US.tar.xz.asc
-
-07/17 20:33:42 [WARN] aria2c had to connect to the other side using an unknown TLS protocol. The integrity and confidentiality of the connection might be compromised.
-Peer: dist.torproject.org (2a01:4f8:fff0:4f:266:37ff:fe2c:5d19:443)
-[#c3547d 65MiB/75MiB(86%) CN:1 DL:13MiB]
-07/17 20:33:48 [NOTICE] Download complete: /home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.1_en-US.tar.xz
+08/01 21:26:59 [NOTICE] Download complete: /home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz.asc
+[#e200c8 66MiB/75MiB(88%) CN:1 DL:14MiB]
+08/01 21:27:04 [NOTICE] Download complete: /home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz
 
 Download Results:
 gid   |stat|avg speed  |path/URI
 ======+====+===========+=======================================================
-6c6998|OK  |    15KiB/s|/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.1_en-US.tar.xz.asc
-c3547d|OK  |    13MiB/s|/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.1_en-US.tar.xz
+923966|OK  |    15KiB/s|/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz.asc
+e200c8|OK  |    13MiB/s|/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz
 
 Status Legend:
 (OK):download completed.
-gpg: assuming signed data in '/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.1_en-US.tar.xz'
-gpg: Signature made Mon Jun 29 20:11:14 2020 CEST
+gpg: assuming signed data in '/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz'
+gpg: Signature made Fri Jul 24 18:13:05 2020 CEST
 gpg:                using RSA key EB774491D9FF06E2
-gpg: Can't check signature: No public key
+gpg: Good signature from "Tor Browser Developers (signing key) <torbrowser@torproject.org>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
+     Subkey fingerprint: 1107 75B5 D101 FB36 BC6C  911B EB77 4491 D9FF 06E2
 tor-browser_en-US/
 tor-browser_en-US/Browser/
 tor-browser_en-US/Browser/.config/
@@ -97,7 +98,36 @@ tor-browser_en-US/Browser/TorBrowser/Data/Browser/profile.default/extensions/
 tor-browser_en-US/Browser/TorBrowser/Data/Browser/profile.default/extensions/https-everywhere-eff@eff.org.xpi
 tor-browser_en-US/Browser/TorBrowser/Data/Browser/profile.default/extensions/{73a6fe31-595d-460b-a920-fcc0f8843232}.xpi
 tor-browser_en-US/Browser/TorBrowser/Data/Browser/profiles.ini
+tor-browser_en-US/Browser/TorBrowser/Data/Tor/
+tor-browser_en-US/Browser/TorBrowser/Data/Tor/geoip
+tor-browser_en-US/Browser/TorBrowser/Data/Tor/geoip6
+tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc
+tor-browser_en-US/Browser/TorBrowser/Data/Tor/torrc-defaults
+tor-browser_en-US/Browser/TorBrowser/Data/fontconfig/
+tor-browser_en-US/Browser/TorBrowser/Data/fontconfig/fonts.conf
+tor-browser_en-US/Browser/TorBrowser/Docs/
+tor-browser_en-US/Browser/TorBrowser/Docs/ChangeLog.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Firefox.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/HTTPS-Everywhere.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Libevent.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/NoScript.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Noto-CJK-Font.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Noto-Fonts.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/PluggableTransports/
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/PluggableTransports/LICENSE
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/PluggableTransports/LICENSE.CC0
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/PluggableTransports/LICENSE.GO
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/PluggableTransports/LICENSE.SNOWFLAKE
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Tor-Launcher.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Tor.txt
+tor-browser_en-US/Browser/TorBrowser/Docs/Licenses/Torbutton.txt
+tor-browser_en-US/Browser/TorBrowser/Tor/
+tor-browser_en-US/Browser/TorBrowser/Tor/PluggableTransports/
 [...]
+tor-browser_en-US/Browser/removed-files
+tor-browser_en-US/Browser/start-tor-browser
+tor-browser_en-US/Browser/start-tor-browser.desktop
 tor-browser_en-US/Browser/tbb_version.json
 tor-browser_en-US/Browser/update-settings.ini
 tor-browser_en-US/Browser/updater

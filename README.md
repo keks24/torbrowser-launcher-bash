@@ -75,7 +75,6 @@ e200c8|OK  |    13MiB/s|/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_
 
 Status Legend:
 (OK):download completed.
-gpg: assuming signed data in '/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz'
 gpg: Signature made Fri Jul 24 18:13:05 2020 CEST
 gpg:                using RSA key EB774491D9FF06E2
 gpg: Good signature from "Tor Browser Developers (signing key) <torbrowser@torproject.org>" [full]

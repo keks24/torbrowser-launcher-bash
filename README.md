@@ -78,11 +78,7 @@ Status Legend:
 gpg: assuming signed data in '/home/ramon/.cache/torbrowser/tor-browser-linux64-9.5.3_en-US.tar.xz'
 gpg: Signature made Fri Jul 24 18:13:05 2020 CEST
 gpg:                using RSA key EB774491D9FF06E2
-gpg: Good signature from "Tor Browser Developers (signing key) <torbrowser@torproject.org>" [unknown]
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg:          There is no indication that the signature belongs to the owner.
-Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
-     Subkey fingerprint: 1107 75B5 D101 FB36 BC6C  911B EB77 4491 D9FF 06E2
+gpg: Good signature from "Tor Browser Developers (signing key) <torbrowser@torproject.org>" [full]
 tor-browser_en-US/
 tor-browser_en-US/Browser/
 tor-browser_en-US/Browser/.config/

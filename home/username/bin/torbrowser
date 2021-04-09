@@ -66,7 +66,7 @@ downloadArchiveAndSignatureFile()
     then
         if [[ $(/usr/bin/curl --silent --request GET "${build_archives_url}/${tarball_filename_version}/" | /bin/sed --expression="s/<[^>]*>//g" | /bin/grep "${tarball_filename}") ]]
         then
-            /usr/bin/aria2c --split="4" --max-connection-per-server="8" --force-sequential --allow-overwrite --auto-file-renaming=false \
+            /usr/bin/aria2c --split="4" --max-connection-per-server="8" --force-sequential="true" --allow-overwrite="true" --auto-file-renaming="false" \
                 "${build_archives_url}/${tarball_filename_version}/${tarball_filename}" \
                 "${build_archives_url}/${tarball_filename_version}/${tarball_signature_filename}" --dir="${download_directory}"
         else

@@ -32,17 +32,19 @@ checkCommands()
 checkCommands
 
 # define global variables
-script_version="v1.2.7"
+script_version="v1.2.8"
 include_alpha_build_versions="false"
 build_archives_url="https://dist.torproject.org/torbrowser/"
 home_directory="/home/$(/usr/bin/id --user --name)"
 script_name="${0##*/}"
-download_directory="${home_directory}/.cache/${script_name}"
+download_directory="${home_directory}/.local/opt/${script_name}"
+# as of 20230828T144835+0200:
+# https://dist.torproject.org/torbrowser/12.5.2/tor-browser-linux64-12.5.2_ALL.tar.xz
 tarball_filename_prefix="tor-browser"
 tarball_filename_architecture="linux64"
-tarball_filename_language="en-US"
+tarball_filename_language="ALL"
 tarball_filename_suffix="tar.xz"
-torbrowser_source_directory="${tarball_filename_prefix}_${tarball_filename_language}"
+torbrowser_source_directory="${tarball_filename_prefix}"
 torbrowser_desktop_filename="start-tor-browser.desktop"
 torbrowser_version_regex="[0-9]{1,2}\.[0-9](\.[0-9]|[a-z][0-9])?"
 
@@ -53,9 +55,9 @@ createDownloadDirectory()
 
 concatenateTarballAndSignatureFilename()
 {
-    # example filename: tor-browser-linux64-9.5.1_en-US.tar.xz
+    # example filename: tor-browser-linux64-12.5.2_ALL.tar.xz
     tarball_filename="${tarball_filename_prefix}-${tarball_filename_architecture}-${tarball_filename_version}_${tarball_filename_language}.${tarball_filename_suffix}"
-    # example filename: tor-browser-linux64-9.5.1_en-US.tar.xz.asc
+    # example filename: tor-browser-linux64-12.5.2_ALL.tar.xz.asc
     tarball_signature_filename="${tarball_filename}.asc"
 }
 

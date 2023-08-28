@@ -32,9 +32,10 @@ checkCommands()
 checkCommands
 
 # define global variables
-script_version="v1.2.8"
+script_version="v1.2.9"
 include_alpha_build_versions="false"
-build_archives_url="https://dist.torproject.org/torbrowser/"
+# alternative: "https://dist.torproject.org/torbrowser/"
+build_archives_url="https://archive.torproject.org/tor-package-archive/torbrowser/"
 home_directory="/home/$(/usr/bin/id --user --name)"
 script_name="${0##*/}"
 download_directory="${home_directory}/.local/opt/${script_name}"
